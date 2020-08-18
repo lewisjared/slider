@@ -58,7 +58,15 @@ const Steps = ({
       [`${prefixCls}-dot-reverse`]: reverse,
     });
 
-    return <StepElement className={pointClassName} style={style} key={point} />;
+    return (
+      <StepElement
+        className={pointClassName}
+        style={style}
+        key={point}
+        isActivated={isActived}
+        value={point}
+      />
+    );
   });
 
   return <div className={`${prefixCls}-step`}>{elements}</div>;
