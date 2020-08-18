@@ -2,7 +2,7 @@ import React from 'react';
 import addEventListener from 'rc-util/lib/Dom/addEventListener';
 import classNames from 'classnames';
 import warning from 'rc-util/lib/warning';
-import Steps from './Steps';
+import Steps, { Step } from './Steps';
 import Marks from './Marks';
 import Handle from '../Handle';
 import * as utils from '../utils';
@@ -29,6 +29,11 @@ export default function createSlider(Component) {
         }
 
         return <Handle {...restProps} key={index} />;
+      },
+      StepElement(props) {
+        const { index, ...restProps } = props;
+
+        return <Step {...restProps} key={index} />;
       },
       onBeforeChange: noop,
       onChange: noop,
@@ -270,6 +275,7 @@ export default function createSlider(Component) {
         railStyle,
         dotStyle,
         activeDotStyle,
+        StepElement,
       } = this.props;
       const { tracks, handles } = super.render();
 
@@ -313,6 +319,7 @@ export default function createSlider(Component) {
             min={min}
             dotStyle={dotStyle}
             activeDotStyle={activeDotStyle}
+            StepElement={StepElement}
           />
           {handles}
           <Marks
