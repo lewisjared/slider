@@ -20,7 +20,7 @@ const calcPoints = (vertical, marks, dots, step, min, max) => {
   return points;
 };
 
-const Step = ({ pointClassName, style }) => <span className={pointClassName} style={style} />;
+const Step = ({ className, style, key }) => <span className={className} style={style} key={key} />;
 
 const Steps = ({
   prefixCls,
@@ -36,7 +36,7 @@ const Steps = ({
   min,
   dotStyle,
   activeDotStyle,
-  StepElement,
+  createStep,
 }) => {
   const range = max - min;
   const elements = calcPoints(vertical, marks, dots, step, min, max).map(point => {
@@ -58,15 +58,12 @@ const Steps = ({
       [`${prefixCls}-dot-reverse`]: reverse,
     });
 
-    return (
-      <StepElement
-        className={pointClassName}
-        style={style}
-        key={point}
-        isActivated={isActived}
-        value={point}
-      />
-    );
+    return createStep({
+      key: point,
+      className: pointClassName,
+      style,
+      value: point,
+    });
   });
 
   return <div className={`${prefixCls}-step`}>{elements}</div>;

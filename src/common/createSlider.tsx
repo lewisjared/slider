@@ -30,10 +30,8 @@ export default function createSlider(Component) {
 
         return <Handle {...restProps} key={index} />;
       },
-      StepElement(props) {
-        const { index, ...restProps } = props;
-
-        return <Step {...restProps} key={index} />;
+      createStep(props) {
+        return <Step {...props} />;
       },
       onBeforeChange: noop,
       onChange: noop,
@@ -275,7 +273,7 @@ export default function createSlider(Component) {
         railStyle,
         dotStyle,
         activeDotStyle,
-        StepElement,
+        createStep,
       } = this.props;
       const { tracks, handles } = super.render();
 
@@ -319,7 +317,7 @@ export default function createSlider(Component) {
             min={min}
             dotStyle={dotStyle}
             activeDotStyle={activeDotStyle}
-            StepElement={StepElement}
+            createStep={createStep}
           />
           {handles}
           <Marks
